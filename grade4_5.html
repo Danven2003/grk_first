@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.7/p5.js"></script>
+    <title>Pixel Manipulation</title>
+</head>
+<body>
+<script>
+    function setup() {
+        createCanvas(800, 600);
+        noLoop();
+    }
+
+    function draw() {
+        //noprotect
+
+        background(100, 100, 250);
+
+        let widthGrass = width;
+        let heightGrass = height - 150;
+
+        drawGrass(widthGrass, heightGrass);
+        drawFlowersOnGrass(2000, width, heightGrass, height);
+
+        let rectWidth = 300;
+        let rectHeight = 200;
+        let centerX = width / 2 - rectWidth / 2;
+        let centerY = heightGrass - rectHeight;
+
+        drawBrownRectangle(centerX, centerY, rectWidth, rectHeight);
+
+        let roofWidth = rectWidth + 100;
+
+        let roofHeight = centerY - 100;
+
+        drawTriangularRoof(centerX - 50, roofHeight,roofWidth, 100, color(255, 192, 203));
+
+        updatePixels();
+    }
+
+    function drawGrass(widthGrass, heightGrass) {
+        // Draw grass
+        for (let x = 0; x < widthGrass; x++) {
+            for (let y = heightGrass; y < height; y++) {
+                set(x, y, color(0, 128, 0));
+            }
+        }
+    }
+
+    function drawFlowersOnGrass(numFlowers, canvasWidth, heightGrass, canvasHeight) {
+        for (let i = 0; i < numFlowers; i++) {
+            set(floor(random(canvasWidth)), height - floor(random(canvasHeight - heightGrass)), color(random(255), random(255), random(255)));
+        }
+    }
+
+    function drawBrownRectangle(centerX, centerY, rectWidth, rectHeight) {
+        for (let x = centerX; x < centerX + rectWidth; x++) {
+            for (let y = centerY; y < centerY + rectHeight; y++) {
+                set(x, y, color(139, 69, 19));
+            }
+        }
+    }
+
+    function drawTriangularRoof(x, y, baseWidth, height, roofColor) {
+        for (let i = 0; i < height; i++) {
+            let lineWidth = floor(baseWidth * (i / height));
+            let startX = x + (baseWidth - lineWidth) / 2;
+
+            for (let j = 0; j < lineWidth; j++) {
+                set(startX + j, y + i, roofColor);
+            }
+        }
+    }
+</script>
+</body>
+</html>
