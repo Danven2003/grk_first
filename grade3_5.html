@@ -1,0 +1,29 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.7/p5.js"></script>
+    <title>Grayscale Gradient</title>
+</head>
+<body>
+<script>
+
+    function setup() {
+        createCanvas(800, 600);
+        noLoop();
+    }
+
+    function draw() {
+        background(0)
+        //noprotect
+        for (let x = 0; x < width; x++) {
+            let grayShade = (x / width) * 256;
+            for (let y = 0; y < height; y++) {
+                set(x, y, color(grayShade));
+            }
+        }
+
+        updatePixels();
+    }
+</script>
